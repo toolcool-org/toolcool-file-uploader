@@ -1,0 +1,60 @@
+{
+  "name": "toolcool-image-uploader",
+  "version": "0.0.1",
+  "description": "",
+  "main": "./dist/toolcool-image-uploader.min.js",
+  "types": "./index.d.ts",
+  "scripts": {
+    "core:build": "node run/core.js",
+    "core:watch": "node run/core.js -- watch",
+    "test": "./node_modules/karma/bin/karma start ./karma.conf.cjs",
+    "eslint": "eslint ./src/**",
+    "docs:website": "http-server ./docs",
+    "docs:build": "node ./src/docs/generator/index.js",
+    "docs:watch": "nodemon ./src/docs/generator/index.js",
+    "docs:install": "node node_modules/markdown-documentation-maker/run/install.js",
+    "typescript-declarations": "tsc --emitDeclarationOnly",
+    "binding-labels-plugin:build": "node run/plugins/binding-labels-plugin.js",
+    "binding-labels-plugin:watch": "node run/plugins/binding-labels-plugin.js -- watch"
+  },
+  "type": "module",
+  "keywords": [
+
+  ],
+  "author": "Tool Cool <toolcool.org@gmail.com>",
+  "license": "",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/toolcool-org/toolcool-file-uploader.git"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "esbuild": "^0.14.49",
+    "eslint": "^8.20.0",
+    "karma": "^6.4.0",
+    "karma-chrome-launcher": "^3.1.1",
+    "karma-firefox-launcher": "^2.1.2",
+    "karma-mocha": "^2.0.1",
+    "karma-qunit": "^4.1.2",
+    "karma-spec-reporter": "^0.0.34",
+    "markdown-documentation-maker": "^1.0.9"
+  },
+  "nodemonConfig": {
+    "restartable": "rs",
+    "ignore": [
+      ".git",
+      "node_modules/**/node_modules"
+    ],
+    "verbose": false,
+    "watch": [
+      "src/docs/"
+    ],
+    "ext": "js,json,html,css,md,ts,tsx,glsl"
+  }
+}
