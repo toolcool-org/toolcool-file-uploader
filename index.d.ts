@@ -1,3 +1,3 @@
-declare module 'toolcool-image-uploader' {
+declare module 'toolcool-file-uploader' {
 
 }

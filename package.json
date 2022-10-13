@@ -1,8 +1,8 @@
 {
-  "name": "toolcool-image-uploader",
+  "name": "toolcool-file-uploader",
   "version": "0.0.1",
   "description": "",
-  "main": "./dist/toolcool-image-uploader.min.js",
+  "main": "./dist/toolcool-file-uploader.min.js",
   "types": "./index.d.ts",
   "scripts": {
     "core:build": "node run/core.js",

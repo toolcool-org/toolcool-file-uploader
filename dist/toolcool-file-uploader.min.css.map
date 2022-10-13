@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../src/core/css/styles.css"],
+  "sourcesContent": ["a{\n    color: red;\n}"],
+  "mappings": "AAAA,EACI",
+  "names": []
+}
