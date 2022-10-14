@@ -9,7 +9,7 @@
 <body>
     <h1>Image Upload Example</h1>
 
-    <div data-tc="file-uploader" id="uploader-1">
+    <div class="tc-file-uploader" id="uploader-1">
 
         <!-- upload panel -->
         <div data-tc="upload-panel">
@@ -47,13 +47,10 @@
 
     <script src="../dist/toolcool-file-uploader.min.js"></script>
     <script>
-        window.tcFileUploader();
-        /*const api = window.tcFileUploader();
-        api.destroy();*/
-
-        /*const $uploader1 = document.getElementById('uploader-1');
-        const uploader = $uploader1.tc.fileUploader;
-        uploader.destroy();*/
+        const api = window.tcFileUploader({
+            path: '#uploader-1',
+        });
+        // api.destroy();
     </script>
 </body>
 </html>

@@ -1,38 +1,36 @@
 import './css/styles.css';
 import Uploader, { IUploader } from './ui/uploader';
+import { settings, ISettings } from './settings';
 
 export interface IToolCoolFileUploader {
   destroy: () => void;
 }
 
-let uploaders : IUploader[] = [];
+const ToolCoolFileUploader = (userSettings?: ISettings) : IToolCoolFileUploader => {
 
-/**
- * Init all file uploader sections on the page.
- * Each section is defined by the following data attribute:
- * data-tc="file-uploader"
- */
-const init = () => {
-  const $uploaders = document.querySelectorAll('[data-tc="file-uploader"]');
-  for(const $uploader of $uploaders){
-    const api = Uploader($uploader as HTMLElement);
-    uploaders.push(api);
+  let uploader: IUploader | undefined = undefined;
+  let $uploader: HTMLElement | undefined = undefined;
 
-    $uploader.tc = $uploader.tc || {
-      fileUploader: api,
-    };
-  }
-};
+  const init = (userSettings?: ISettings) => {
+    const combinedSettings = Object.assign(settings, userSettings);
 
-const destroy = () => {
-  for(const uploader of uploaders){
-    uploader.destroy();
-  }
-  uploaders = [];
-};
+    $uploader = document.querySelector(combinedSettings.path) as HTMLElement;
+    if(!$uploader){
+      console.error(`File uploader error: the path property is not defined.`);
+      return;
+    }
 
-const ToolCoolFileUploader = () : IToolCoolFileUploader => {
-  init();
+    uploader = Uploader($uploader, combinedSettings);
+  };
+
+  const destroy = () => {
+    uploader?.destroy();
+
+    uploader = undefined;
+    $uploader = undefined;
+  };
+
+  init(userSettings);
 
   return {
     destroy,

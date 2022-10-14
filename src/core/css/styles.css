@@ -8,7 +8,7 @@
 /**
  * upload panel styles
  */
-[data-tc="file-uploader"] {
+.tc-file-uploader {
     background: #111927;
     color: #efefef;
     display: flex;
