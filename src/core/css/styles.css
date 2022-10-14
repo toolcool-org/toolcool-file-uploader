@@ -1,29 +1,38 @@
+:root{
+    --tcfu-min-height: 350px;
+    --tcfu-bg-color: #111927;
+    --tcfu-text-color: #efefef;
+    --tcfu-btn-bg-color: #304DAB;
+    --tcfu-btn-bg-color-hover: #213A8A;
+}
+
 /**
  * common styles
  */
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 /**
  * upload panel styles
  */
 .tc-file-uploader {
-    background: #111927;
-    color: #efefef;
+    background: var(--tcfu-bg-color);
+    color: var(--tcfu-text-color);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-items: center;
     padding: 1rem;
     width: 100%;
+    min-height: var(--tcfu-min-height);
     max-width: 650px;
     border-radius: 3px;
 }
 
 [data-tc="upload-panel"] {
     width: 100%;
-    min-height: 350px;
+    min-height: var(--tcfu-min-height);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -35,7 +44,7 @@
 }
 
 .tc-upload-panel__btn{
-    background: #304DAB;
+    background: var(--tcfu-btn-bg-color);
     display: inline-block;
     cursor: pointer;
     padding: 0.7rem 2rem;
@@ -45,7 +54,7 @@
 }
 
 .tc-upload-panel__btn:hover{
-    background: #213A8A;
+    background: var(--tcfu-btn-bg-color-hover);
 }
 
 [data-tc="upload-panel"].is-dragover{
@@ -57,5 +66,9 @@
  * preview panel styles
  */
 [data-tc="preview-panel"] {
-
+    width: 100%;
+    min-height: var(--tcfu-min-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

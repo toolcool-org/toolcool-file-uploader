@@ -10,10 +10,10 @@ const DRAG_CLASS = 'is-dragover';
 const Uploader = ($uploader: HTMLElement, settings: ISettings) : IUploader => {
   let pluginsProvider: IPluginsProvider | null = null;
 
-  const $uploadPanel = $uploader.querySelector('[data-tc="upload-panel"]');
+  const $uploadPanel = $uploader.querySelector('[data-tc="upload-panel"]') as HTMLElement;
   const $fileInput = $uploadPanel?.querySelector('input[type="file"]');
 
-  // const $previewPanel = $uploader.querySelector('[data-tc="preview-panel"]');
+  const $previewPanel = $uploader.querySelector('[data-tc="preview-panel"]') as HTMLElement;
 
   const prevent = (evt: MouseEvent) => {
     evt.preventDefault();
@@ -42,7 +42,13 @@ const Uploader = ($uploader: HTMLElement, settings: ISettings) : IUploader => {
   };
 
   const upload = async (file: File) => {
-    console.log('file', file);
+
+    pluginsProvider?.upload({
+      file,
+      $uploadPanel,
+      $previewPanel,
+    });
+
     /*
     if (!file.type.match('image.*')) {
       // https://fkhadra.github.io/react-toastify/introduction/

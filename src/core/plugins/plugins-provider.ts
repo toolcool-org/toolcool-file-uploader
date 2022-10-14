@@ -1,8 +1,9 @@
 import { ISettings } from '../settings';
-import { IPlugin } from './declarations';
+import { IPlugin, IUploadData } from './plugin-declarations';
 
 export interface IPluginsProvider {
   init: () => void;
+  upload: (uploadData: IUploadData) => void;
   destroy: () => void;
 }
 
@@ -23,6 +24,14 @@ const PluginsProvider = (settings: ISettings) : IPluginsProvider => {
     }
   };
 
+  const upload = (uploadData: IUploadData) => {
+    for(const plugin of plugins){
+      if(plugin.upload && typeof plugin.upload === 'function'){
+        plugin.upload(uploadData);
+      }
+    }
+  };
+
   const destroy = () => {
     for(const plugin of plugins){
       if(plugin.destroy && typeof plugin.destroy === 'function'){
@@ -33,6 +42,7 @@ const PluginsProvider = (settings: ISettings) : IPluginsProvider => {
 
   return {
     init,
+    upload,
     destroy,
   };
 };

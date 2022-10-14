@@ -1,4 +1,4 @@
-import { IPlugin } from './plugins/declarations';
+import { IPlugin } from './plugins/plugin-declarations';
 import ImagePreviewPlugin from './plugins/image-preview-plugin/image-preview-plugin';
 
 export interface ISettings {
