@@ -1,7 +1,13 @@
+/**
+ * common styles
+ */
 .hidden {
     display: none;
 }
 
+/**
+ * upload panel styles
+ */
 [data-tc="file-uploader"] {
     background: #111927;
     color: #efefef;
@@ -16,12 +22,12 @@
 }
 
 [data-tc="upload-panel"] {
+    width: 100%;
     min-height: 350px;
     display: flex;
     align-items: center;
-    justify-items: center;
+    justify-content: center;
 }
-
 
 .tc-upload-panel__inputs{
     display: flex;
@@ -42,11 +48,14 @@
     background: #213A8A;
 }
 
-.is-dragover{
+[data-tc="upload-panel"].is-dragover{
     background-color: #2b3850;
     border: 0;
 }
 
+/**
+ * preview panel styles
+ */
 [data-tc="preview-panel"] {
 
 }
