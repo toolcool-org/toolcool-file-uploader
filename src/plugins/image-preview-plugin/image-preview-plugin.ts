@@ -38,20 +38,39 @@ const loadImage = (file: File) => {
  */
 const ImagePreviewPlugin = () : IPlugin => {
 
+  let uploadData: IUploadData | undefined = undefined;
   let img: ILoadedImage | undefined = undefined;
+  let $previewPanel: HTMLElement | undefined = undefined;
+  let $cancelButton: HTMLElement | undefined = undefined;
+
+  const cancel = () => {
+    if(!uploadData) return;
+
+    uploadData.$uploadPanel?.classList.remove('hidden');
+    $previewPanel?.classList.add('hidden');
+
+    img?.$image.remove();
+    img = undefined;
+  };
 
   return {
     extensions: ['jpg', 'jpeg', 'png', 'gif'],
 
-    upload: async (uploadData: IUploadData) => {
-      const $previewPanel = uploadData.$uploader.querySelector('[data-tc="preview-panel"]') as HTMLElement;
+    upload: async (_uploadData: IUploadData) => {
+      uploadData = _uploadData;
+      $previewPanel = uploadData.$uploader.querySelector('[data-tc="preview-panel"]') as HTMLElement;
       if(!$previewPanel) return;
 
       uploadData.$uploadPanel?.classList.add('hidden');
-      $previewPanel.classList.remove('hidden');
+      $previewPanel?.classList.remove('hidden');
 
       img = await loadImage(uploadData.file);
-      $previewPanel.append(img.$image);
+
+      const $preview = $previewPanel.querySelector('[data-tc="preview"]') as HTMLElement;
+      $preview?.append(img.$image);
+
+      $cancelButton = $previewPanel.querySelector('[data-tc="cancel-preview"]') as HTMLElement;
+      $cancelButton?.addEventListener('click', cancel);
     },
 
     destroy: () => {
@@ -62,7 +81,12 @@ const ImagePreviewPlugin = () : IPlugin => {
         // error
       }
 
+      $cancelButton?.removeEventListener('click', cancel);
+
+      uploadData = undefined;
       img = undefined;
+      $previewPanel = undefined;
+      $cancelButton = undefined;
     },
   };
 };

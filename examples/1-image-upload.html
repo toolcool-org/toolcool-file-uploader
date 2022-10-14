@@ -16,7 +16,7 @@
             <div class="tc-upload-panel__inputs">
                 <label>
                     <input type="file" class="hidden" />
-                    <span class="tc-upload-panel__btn">Choose File</span>
+                    <span class="tcfu__btn">Choose File</span>
                 </label>
 
                 <span>or drag it here.</span>
@@ -24,26 +24,14 @@
         </div>
 
         <!-- preview panel -->
-        <div data-tc="preview-panel" class="hidden"></div>
-    </div>
-
-    <!--<div data-tc="file-uploader" id="uploader-2">
-
-        &lt;!&ndash; upload panel &ndash;&gt;
-        <div data-tc="upload-panel">
-            <div class="tc-upload-panel__inputs">
-                <label>
-                    <input type="file" class="hidden" />
-                    <span class="tc-upload-panel__btn">Choose File</span>
-                </label>
-
-                <span>or drag it here.</span>
+        <div data-tc="preview-panel" class="hidden">
+            <div data-tc="preview"></div>
+            <div data-tc="buttons">
+                <button type="button" class="tcfu__btn">Save</button>
+                <button type="button" class="tcfu__btn" data-tc="cancel-preview">Cancel</button>
             </div>
         </div>
-
-        &lt;!&ndash; preview panel &ndash;&gt;
-        <div data-tc="preview-panel" class="hidden"></div>
-    </div>-->
+    </div>
 
     <script src="../dist/toolcool-file-uploader.min.js"></script>
     <script>
