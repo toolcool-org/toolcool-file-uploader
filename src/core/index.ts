@@ -1,6 +1,10 @@
 import './css/styles.css';
 import Uploader from './ui/uploader';
 
+export interface IToolCoolFileUploader {
+
+}
+
 /**
  * Init all file uploader sections on the page.
  * Each section is defined by the following data attribute:
@@ -16,8 +20,12 @@ const init = () => {
   }
 };
 
-const ToolCoolFileUploader = () => {
+const ToolCoolFileUploader = () : IToolCoolFileUploader => {
   init();
+
+  return {
+
+  };
 };
 
 export default ToolCoolFileUploader;

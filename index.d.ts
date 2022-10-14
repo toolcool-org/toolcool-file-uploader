@@ -1,14 +1,29 @@
 declare module 'toolcool-file-uploader' {
 
+
+  export interface ISettings {
+
+  }
+
+  export interface IPlugin {
+    extensions: string[], // The list of extensions that plugin can handle, without the dot.
+  }
+
+  export interface IPluginsProvider {
+
+  }
+
   export interface IUploader {
     destroy: () => void;
   }
 
-  const ToolCoolFileUploader: () => void;
+  export interface IToolCoolFileUploader {
+
+  }
 
   global {
     interface Window {
-      tcFileUploader: typeof ToolCoolFileUploader;
+      tcFileUploader: IToolCoolFileUploader;
     }
     interface Element {
       tc: {

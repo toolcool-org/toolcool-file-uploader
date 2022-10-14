@@ -1,3 +1,5 @@
 import './css/styles.css';
-declare const ToolCoolFileUploader: () => void;
+export interface IToolCoolFileUploader {
+}
+declare const ToolCoolFileUploader: () => IToolCoolFileUploader;
 export default ToolCoolFileUploader;
