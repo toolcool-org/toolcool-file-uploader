@@ -13,8 +13,6 @@ const Uploader = ($uploader: HTMLElement, settings: ISettings) : IUploader => {
   const $uploadPanel = $uploader.querySelector('[data-tc="upload-panel"]') as HTMLElement;
   const $fileInput = $uploadPanel?.querySelector('input[type="file"]');
 
-  const $previewPanel = $uploader.querySelector('[data-tc="preview-panel"]') as HTMLElement;
-
   const prevent = (evt: MouseEvent) => {
     evt.preventDefault();
     evt.stopPropagation();
@@ -45,8 +43,8 @@ const Uploader = ($uploader: HTMLElement, settings: ISettings) : IUploader => {
 
     pluginsProvider?.upload({
       file,
+      $uploader,
       $uploadPanel,
-      $previewPanel,
     });
 
     /*

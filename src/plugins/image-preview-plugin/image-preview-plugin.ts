@@ -1,4 +1,5 @@
-import { IPlugin, IUploadData } from '../plugin-declarations';
+import { IPlugin, IUploadData } from '../../core/plugins/plugin-declarations';
+import './styles.css';
 
 export interface ILoadedImage {
   $image: HTMLImageElement;
@@ -33,6 +34,7 @@ const loadImage = (file: File) => {
 
 /**
  * This plugin displays standard image formats in the preview panel.
+ * This plugin is part of the core system.
  */
 const ImagePreviewPlugin = () : IPlugin => {
 
@@ -41,25 +43,24 @@ const ImagePreviewPlugin = () : IPlugin => {
   return {
     extensions: ['jpg', 'jpeg', 'png', 'gif'],
 
-    init: () => {
-
-    },
-
     upload: async (uploadData: IUploadData) => {
-      if(!uploadData.$previewPanel) return;
+      const $previewPanel = uploadData.$uploader.querySelector('[data-tc="preview-panel"]') as HTMLElement;
+      if(!$previewPanel) return;
 
       uploadData.$uploadPanel?.classList.add('hidden');
-      uploadData.$previewPanel.classList.remove('hidden');
+      $previewPanel.classList.remove('hidden');
 
       img = await loadImage(uploadData.file);
-      uploadData.$previewPanel.append(img.$image);
+      $previewPanel.append(img.$image);
     },
 
     destroy: () => {
       try{
         img?.$image?.remove();
       }
-      catch(ex){}
+      catch(ex){
+        // error
+      }
 
       img = undefined;
     },

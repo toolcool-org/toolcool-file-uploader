@@ -1,0 +1,15 @@
+/**
+ * preview panel styles
+ */
+[data-tc="preview-panel"] {
+    width: 100%;
+    min-height: var(--tcfu-min-height);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-tc="preview-panel"] img {
+    max-width: 100%;
+    max-height: 100%;
+}

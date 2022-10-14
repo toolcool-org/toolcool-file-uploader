@@ -61,14 +61,3 @@
     background-color: #2b3850;
     border: 0;
 }
-
-/**
- * preview panel styles
- */
-[data-tc="preview-panel"] {
-    width: 100%;
-    min-height: var(--tcfu-min-height);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}

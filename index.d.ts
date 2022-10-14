@@ -7,8 +7,8 @@ declare module 'toolcool-file-uploader' {
 
   export interface IUploadData {
     file: File;
+    $uploader: HTMLElement;
     $uploadPanel?: HTMLElement;
-    $previewPanel?: HTMLElement;
   }
 
   export interface IPlugin {

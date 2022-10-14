@@ -1,5 +1,5 @@
 import { IPlugin } from './plugins/plugin-declarations';
-import ImagePreviewPlugin from './plugins/image-preview-plugin/image-preview-plugin';
+import ImagePreviewPlugin from '../plugins/image-preview-plugin/image-preview-plugin';
 
 export interface ISettings {
   path: string,
