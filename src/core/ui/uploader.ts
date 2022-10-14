@@ -1,3 +1,5 @@
+import PluginsProvider, { IPluginsProvider } from '../plugins/plugins-provider';
+
 export interface IUploader {
   destroy: () => void;
 }
@@ -5,6 +7,8 @@ export interface IUploader {
 const DRAG_CLASS = 'is-dragover';
 
 const Uploader = ($uploader: HTMLElement) : IUploader => {
+  let pluginsProvider: IPluginsProvider | null = null;
+
   const $uploadPanel = $uploader.querySelector('[data-tc="upload-panel"]');
   const $fileInput = $uploadPanel?.querySelector('input[type="file"]');
 
@@ -58,6 +62,8 @@ const Uploader = ($uploader: HTMLElement) : IUploader => {
   };
 
   (() => {
+    pluginsProvider = PluginsProvider();
+
     $fileInput?.addEventListener('change', onFileInputChange);
     $uploadPanel?.addEventListener('drag', prevent);
     $uploadPanel?.addEventListener('dragstart', prevent);
@@ -77,6 +83,8 @@ const Uploader = ($uploader: HTMLElement) : IUploader => {
     $uploadPanel?.removeEventListener('dragover', addDragClass);
     $uploadPanel?.removeEventListener('dragenter', addDragClass);
     $uploadPanel?.removeEventListener('drop', handleDrop);
+
+    pluginsProvider?.destroy();
   };
 
   return {

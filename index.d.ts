@@ -6,7 +6,8 @@ declare module 'toolcool-file-uploader' {
   }
 
   export interface IPlugin {
-    extensions: string[], // The list of extensions that plugin can handle, without the dot.
+    extensions: string[]; // The list of extensions that plugin can handle, without the dot.
+    destroy?: () => void;
   }
 
   export interface IPluginsProvider {
@@ -18,7 +19,7 @@ declare module 'toolcool-file-uploader' {
   }
 
   export interface IToolCoolFileUploader {
-
+    destroy: () => void;
   }
 
   export const ToolCoolFileUploader: () => IToolCoolFileUploader;
