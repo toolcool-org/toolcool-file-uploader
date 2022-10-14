@@ -10,7 +10,7 @@ declare module 'toolcool-file-uploader' {
   }
 
   export interface IPluginsProvider {
-
+    destroy: () => void;
   }
 
   export interface IUploader {
@@ -21,9 +21,11 @@ declare module 'toolcool-file-uploader' {
 
   }
 
+  export const ToolCoolFileUploader: () => IToolCoolFileUploader;
+
   global {
     interface Window {
-      tcFileUploader: IToolCoolFileUploader;
+      tcFileUploader: typeof ToolCoolFileUploader;
     }
     interface Element {
       tc: {

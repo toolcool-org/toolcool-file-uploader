@@ -13,6 +13,13 @@
 
 ### Destroy
 ```js
+// destroy all uploaders on the page
+const api = window.tcFileUploader();
+api.destroy();
+
+// OR
+
+// destroy one specific uploader
 const $uploader1 = document.getElementById('uploader-1');
 const uploader = $uploader1.tc.fileUploader;
 uploader.destroy();
