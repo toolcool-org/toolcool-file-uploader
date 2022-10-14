@@ -42,6 +42,11 @@
     background: #213A8A;
 }
 
+.is-dragover{
+    background-color: #2b3850;
+    border: 0;
+}
+
 [data-tc="preview-panel"] {
 
 }
