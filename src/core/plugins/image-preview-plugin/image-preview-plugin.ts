@@ -6,6 +6,14 @@ import { IPlugin } from '../declarations';
 const ImagePreviewPlugin = () : IPlugin => {
   return {
     extensions: ['jpg', 'jpeg', 'png', 'gif'],
+
+    init: () => {
+      console.log('init');
+    },
+
+    destroy: () => {
+      console.log('destroy');
+    },
   };
 };
 

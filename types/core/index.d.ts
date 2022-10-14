@@ -1,5 +1,7 @@
 import './css/styles.css';
+import { ISettings } from './settings';
 export interface IToolCoolFileUploader {
+    destroy: () => void;
 }
-declare const ToolCoolFileUploader: () => IToolCoolFileUploader;
+declare const ToolCoolFileUploader: (userSettings?: ISettings) => IToolCoolFileUploader;
 export default ToolCoolFileUploader;

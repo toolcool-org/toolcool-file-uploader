@@ -2,7 +2,7 @@ declare module 'toolcool-file-uploader' {
 
   export interface ISettings {
     path: string,
-    plugins?: IPlugin[];
+    plugins?: (() => IPlugin)[];
   }
 
   export interface IPlugin {

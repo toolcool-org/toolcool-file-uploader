@@ -1,4 +1,5 @@
 import { ISettings } from '../settings';
+import { IPlugin } from './declarations';
 
 export interface IPluginsProvider {
   init: () => void;
@@ -7,10 +8,15 @@ export interface IPluginsProvider {
 
 const PluginsProvider = (settings: ISettings) : IPluginsProvider => {
 
+  const plugins: IPlugin[] = [];
+
   const init = () => {
     if(!settings.plugins) return;
 
-    for(const plugin of settings.plugins){
+    for(const pluginFunc of settings.plugins){
+      const plugin = pluginFunc();
+      plugins.push(plugin);
+
       if(plugin.init && typeof plugin.init === 'function'){
         plugin.init();
       }
@@ -18,9 +24,7 @@ const PluginsProvider = (settings: ISettings) : IPluginsProvider => {
   };
 
   const destroy = () => {
-    if(!settings.plugins) return;
-    
-    for(const plugin of settings.plugins){
+    for(const plugin of plugins){
       if(plugin.destroy && typeof plugin.destroy === 'function'){
         plugin.destroy();
       }
