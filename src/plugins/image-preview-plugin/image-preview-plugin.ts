@@ -68,6 +68,9 @@ const ImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
   };
 
   return {
+    id: 'ImagePreviewPlugin',
+    title: 'Image Preview Plugin',
+
     extensions: ['jpg', 'jpeg', 'png', 'gif'],
 
     upload: async (_uploadData: IUploadData) => {

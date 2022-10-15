@@ -26,22 +26,17 @@ export const validate = (settings: ISettings, file: File, plugins: IPlugin[]) : 
     message: '',
   };
 
-  let isValid = true;
-  let message = '';
-
   // validate file extension ---------------
-  if(isValid){
-    const ext = getExtensionWithoutDot(file.name);
-    if(!extensionIncluded(ext, plugins)){
-      return {
-        isValid: false,
-        message: `The '.${ ext }' file extension is not supported.`,
-      };
-    }
+  const ext = getExtensionWithoutDot(file.name);
+  if(!extensionIncluded(ext, plugins)){
+    return {
+      isValid: false,
+      message: `The '.${ ext }' file extension is not supported.`,
+    };
   }
 
   return {
-    isValid,
-    message,
+    isValid: true,
+    message: '',
   };
 };
