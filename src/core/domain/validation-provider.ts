@@ -34,7 +34,7 @@ const mimeTypeIncluded = (mimeType: string, plugins: IPlugin[]) => {
   return false;
 };
 
-export const validate = (settings: ISettings, file: File, plugins: IPlugin[]) : IValidationResult => {
+export const validate = async (settings: ISettings, file: File, plugins: IPlugin[]) : Promise<IValidationResult> => {
   if(!settings.validationEnabled) return {
     isValid: true,
     message: '',
@@ -55,6 +55,13 @@ export const validate = (settings: ISettings, file: File, plugins: IPlugin[]) : 
       isValid: false,
       message: `The '${ file.type }' file MIME type is not supported.`,
     };
+  }
+
+  // call plugins validations if available ------------------
+  for(const plugin of plugins){
+    if(!plugin.validate || typeof plugin.validate !== 'function') continue;
+    const res = await plugin.validate(settings, file);
+    if(!res.isValid) return res;
   }
 
   return {

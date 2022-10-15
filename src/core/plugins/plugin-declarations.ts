@@ -1,3 +1,6 @@
+import { IValidationResult } from '../domain/validation-provider';
+import { ISettings } from '../settings';
+
 export interface IUploadData {
   file: File;
   $uploader: HTMLElement;
@@ -11,5 +14,6 @@ export interface IPlugin {
   mimeTypes: string[]; // https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
   init?: () => void;
   upload?: (uploadData: IUploadData) => void;
+  validate?: (settings: ISettings, file: File) => Promise<IValidationResult>;
   destroy?: () => void;
 }

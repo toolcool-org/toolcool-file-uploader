@@ -81,6 +81,26 @@ const ImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
       'image/webp',
     ],
 
+    /**
+     * Check if the image is valid.
+     */
+    validate: async (_settings: ISettings, file: File) => {
+      try{
+        await loadImage(file);
+      }
+      catch (ex){
+        return {
+          isValid: false,
+          message: 'Invalid image.'
+        };
+      }
+
+      return {
+        isValid: true,
+        message: '',
+      };
+    },
+
     upload: async (_uploadData: IUploadData) => {
       uploadData = _uploadData;
       $previewPanel = uploadData.$uploader.querySelector('[data-tc="preview-panel"]') as HTMLElement;
@@ -89,7 +109,20 @@ const ImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
       uploadData.$uploadPanel?.classList.add('hidden');
       $previewPanel?.classList.remove('hidden');
 
-      img = await loadImage(uploadData.file);
+      $cancelButton = $previewPanel.querySelector('[data-tc="cancel-preview-btn"]') as HTMLElement;
+      $cancelButton?.addEventListener('click', cancel);
+
+      $uploadBtn = $previewPanel.querySelector('[data-tc="upload-btn"]') as HTMLElement;
+      $uploadBtn?.addEventListener('click', upload);
+
+      try{
+        img = await loadImage(uploadData.file);
+      }
+      catch (ex){
+        console.error('Image is not valid:', ex);
+      }
+
+      if(!img) return;
 
       const $preview = $previewPanel.querySelector('[data-tc="preview"]') as HTMLElement;
       $preview?.append(img.$image);
@@ -100,12 +133,6 @@ const ImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
           ext: getExtensionWithoutDot(_uploadData.file?.name ?? ''),
         });
       }
-
-      $cancelButton = $previewPanel.querySelector('[data-tc="cancel-preview-btn"]') as HTMLElement;
-      $cancelButton?.addEventListener('click', cancel);
-
-      $uploadBtn = $previewPanel.querySelector('[data-tc="upload-btn"]') as HTMLElement;
-      $uploadBtn?.addEventListener('click', upload);
     },
 
     destroy: () => {

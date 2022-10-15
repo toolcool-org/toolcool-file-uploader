@@ -43,7 +43,7 @@ const Uploader = ($uploader: HTMLElement, settings: ISettings) : IUploader => {
   const upload = async (file: File) => {
 
     // perform validations ----------------
-    const validationResult = validate(settings, file, pluginsProvider?.getPlugins() ?? []);
+    const validationResult = await validate(settings, file, pluginsProvider?.getPlugins() ?? []);
     if(!validationResult.isValid){
       alert(validationResult.message);
       return;
