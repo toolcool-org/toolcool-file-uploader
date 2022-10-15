@@ -35,22 +35,20 @@ const Uploader = ($uploader: HTMLElement, settings: ISettings) : IUploader => {
     removeDragClass(evt);
 
     if(!evt || !evt.dataTransfer || !evt.dataTransfer.files || evt.dataTransfer.files.length < 0) return;
-
-    const file: File = evt.dataTransfer.files[0];
-    await upload(file);
+    await upload(Array.from(evt.dataTransfer.files));
   };
 
-  const upload = async (file: File) => {
+  const upload = async (files: File[]) => {
 
     // perform validations ----------------
-    const validationResult = await validate(settings, file, pluginsProvider?.getPlugins() ?? []);
+    const validationResult = await validate(settings, files, pluginsProvider?.getPlugins() ?? []);
     if(!validationResult.isValid){
       alert(validationResult.message);
       return;
     }
 
     pluginsProvider?.upload({
-      file,
+      files,
       $uploader,
       $uploadPanel,
     });
@@ -69,9 +67,7 @@ const Uploader = ($uploader: HTMLElement, settings: ISettings) : IUploader => {
   const onFileInputChange = async (evt: MouseEvent) => {
     const $target = evt.target as HTMLInputElement;
     if(!$target.files || $target.files.length <= 0) return;
-
-    const file: File = $target.files[0];
-    await upload(file);
+    await upload(Array.from($target.files));
   };
 
   (() => {

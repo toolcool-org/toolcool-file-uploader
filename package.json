@@ -14,8 +14,8 @@
     "docs:watch": "nodemon ./src/docs/generator/index.js",
     "docs:install": "node node_modules/markdown-documentation-maker/run/install.js",
     "typescript-declarations": "tsc --emitDeclarationOnly",
-    "binding-labels-plugin:build": "node run/plugins/binding-labels-plugin.js",
-    "binding-labels-plugin:watch": "node run/plugins/binding-labels-plugin.js -- watch"
+    "multi-image-preview-plugin:build": "node run/plugins/multi-image-preview-plugin.js",
+    "multi-image-preview-plugin:watch": "node run/plugins/multi-image-preview-plugin.js -- watch"
   },
   "type": "module",
   "keywords": [

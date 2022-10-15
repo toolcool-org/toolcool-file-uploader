@@ -1,13 +1,11 @@
 declare module 'toolcool-file-uploader' {
 
   export interface IPreviewCallbackData {
-    file: File;
-    ext: string;
+    files: File[];
   }
 
   export interface IUploadCallbackData {
-    file: File;
-    ext: string;
+    files: File[];
   }
 
   export interface ISettings {
@@ -26,7 +24,7 @@ declare module 'toolcool-file-uploader' {
   }
 
   export interface IUploadData {
-    file: File;
+    files: File[];
     $uploader: HTMLElement;
     $uploadPanel?: HTMLElement;
   }

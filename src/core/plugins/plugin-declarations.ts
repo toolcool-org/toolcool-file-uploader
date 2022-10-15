@@ -2,7 +2,7 @@ import { IValidationResult } from '../domain/validation-provider';
 import { ISettings } from '../settings';
 
 export interface IUploadData {
-  file: File;
+  files: File[];
   $uploader: HTMLElement;
   $uploadPanel?: HTMLElement;
 }

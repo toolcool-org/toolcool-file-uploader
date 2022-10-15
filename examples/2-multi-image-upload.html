@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Image Upload Example | Tool Cool File Uploader</title>
+    <title>Multiple Image Upload Example | Tool Cool File Uploader</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="../dist/toolcool-file-uploader.min.css" />
+    <link rel="stylesheet" href="../dist/plugins/tcfu-multi-image-preview.min.css" />
 </head>
 <body>
-    <h1>Image Upload Example</h1>
+    <h1>Multiple Image Upload Example</h1>
 
     <div class="tc-file-uploader" id="uploader-1">
 
@@ -15,11 +16,11 @@
         <div data-tc="upload-panel">
             <div class="tc-upload-panel__inputs">
                 <label>
-                    <input type="file" class="hidden" accept=".jpg,.jpeg,.png,.apng,.gif,.avif,.svg,.webp" />
-                    <span class="tcfu__btn">Choose Image</span>
+                    <input type="file" class="hidden" accept=".jpg,.jpeg,.png,.apng,.gif,.avif,.svg,.webp" multiple />
+                    <span class="tcfu__btn">Choose Images</span>
                 </label>
 
-                <span>or drag it here.</span>
+                <span>or drag them here.</span>
             </div>
         </div>
 
@@ -34,15 +35,12 @@
     </div>
 
     <script src="../dist/toolcool-file-uploader.min.js"></script>
+    <script src="../dist/plugins/tcfu-multi-image-preview.min.js"></script>
     <script>
         const api = window.tcFileUploader({
             path: '#uploader-1',
             maxSizeInBytes: 5 * 1024 * 1024, // 5MB
-            //maxWidth: 100,
-            //maxHeight: 100,
-            /*previewCallback: (data) => {
-                console.log(data);
-            },*/
+            plugins: [window.tcfuImagePreviewPlugin],
             uploadCallback: (data) => {
                 alert(`The user clicked 'save' button: ${ data.file.name }`);
             },

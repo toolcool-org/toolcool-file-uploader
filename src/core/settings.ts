@@ -1,14 +1,12 @@
 import { IPlugin } from './plugins/plugin-declarations';
-import ImagePreviewPlugin from '../plugins/image-preview-plugin/image-preview-plugin';
+import ImagePreviewPlugin from '../plugins/image-preview-plugin';
 
 export interface IPreviewCallbackData {
-  file: File;
-  ext: string;
+  files: File[];
 }
 
 export interface IUploadCallbackData {
-  file: File;
-  ext: string;
+  files: File[];
 }
 
 export interface ISettings {

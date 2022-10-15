@@ -35,11 +35,7 @@ const mimeTypeIncluded = (mimeType: string, plugins: IPlugin[]) => {
   return false;
 };
 
-export const validate = async (settings: ISettings, file: File, plugins: IPlugin[]) : Promise<IValidationResult> => {
-  if(!settings.validationEnabled) return {
-    isValid: true,
-    message: '',
-  };
+const validaFile = async (settings: ISettings, file: File, plugins: IPlugin[]) : Promise<IValidationResult> => {
 
   // validate file extension ---------------
   const ext = getExtensionWithoutDot(file.name);
@@ -59,7 +55,7 @@ export const validate = async (settings: ISettings, file: File, plugins: IPlugin
   }
 
   // validate the file size -----------------
-  if(isNumber(settings.maxSizeInBytes) && file.size > (settings.maxSizeInBytes as Number)){
+  if(isNumber(settings.maxSizeInBytes) && file.size > (settings.maxSizeInBytes as number)){
     return {
       isValid: false,
       message: `The maximum file size must not exceed ${ settings.maxSizeInBytes } bytes.`,
@@ -70,6 +66,23 @@ export const validate = async (settings: ISettings, file: File, plugins: IPlugin
   for(const plugin of plugins){
     if(!plugin.validate || typeof plugin.validate !== 'function') continue;
     const res = await plugin.validate(settings, file);
+    if(!res.isValid) return res;
+  }
+
+  return {
+    isValid: true,
+    message: '',
+  };
+};
+
+export const validate = async (settings: ISettings, files: File[], plugins: IPlugin[]) : Promise<IValidationResult> => {
+  if(!settings.validationEnabled) return {
+    isValid: true,
+    message: '',
+  };
+
+  for(const file of files){
+    const res = await validaFile(settings, file, plugins);
     if(!res.isValid) return res;
   }
 

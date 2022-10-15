@@ -1,7 +1,6 @@
 import './styles.css';
 import { IPlugin, IUploadData } from '../../core/plugins/plugin-declarations';
 import { ISettings } from '../../core/settings';
-import { getExtensionWithoutDot } from '../../core/domain/io-provider';
 import { isNumber } from '../../core/domain/math-provider';
 
 export interface ILoadedImage {
@@ -36,10 +35,9 @@ const loadImage = (file: File) => {
 };
 
 /**
- * This plugin displays standard image formats in the preview panel.
- * This plugin is part of the core system.
+ * This plugin displays a group of standard image formats in the preview panel.
  */
-const ImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
+const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
 
   let uploadData: IUploadData | undefined = undefined;
   let img: ILoadedImage | undefined = undefined;
@@ -62,15 +60,14 @@ const ImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
 
     if(_settings.uploadCallback && typeof _settings.uploadCallback === 'function'){
       _settings.uploadCallback({
-        file: uploadData.file,
-        ext: getExtensionWithoutDot(uploadData.file?.name ?? ''),
+        files: uploadData.files,
       });
     }
   };
 
   return {
-    id: 'ImagePreviewPlugin',
-    title: 'Image Preview Plugin',
+    id: 'MultiImagePreviewPlugin',
+    title: 'Multi Image Preview Plugin',
 
     extensions: ['jpg', 'jpeg', 'png', 'apng', 'gif', 'avif', 'svg', 'webp'],
     mimeTypes: [
@@ -96,14 +93,14 @@ const ImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
         };
       }
 
-      if(isNumber(_settings.maxWidth) && img.width > (_settings.maxWidth as Number)){
+      if(isNumber(_settings.maxWidth) && img.width > (_settings.maxWidth as number)){
         return {
           isValid: false,
           message: `The image width should not be more than ${ _settings.maxWidth } pixels.`,
         };
       }
 
-      if(isNumber(_settings.maxHeight) && img.height > (_settings.maxHeight as Number)){
+      if(isNumber(_settings.maxHeight) && img.height > (_settings.maxHeight as number)){
         return {
           isValid: false,
           message: `The image height should not be more than ${ _settings.maxHeight } pixels.`,
@@ -130,7 +127,7 @@ const ImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
       $uploadBtn = $previewPanel.querySelector('[data-tc="upload-btn"]') as HTMLElement;
       $uploadBtn?.addEventListener('click', upload);
 
-      try{
+      /*try{
         img = await loadImage(uploadData.file);
       }
       catch (ex){
@@ -147,7 +144,7 @@ const ImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
           file: _uploadData.file,
           ext: getExtensionWithoutDot(_uploadData.file?.name ?? ''),
         });
-      }
+      }*/
     },
 
     destroy: () => {
@@ -170,4 +167,12 @@ const ImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
   };
 };
 
-export default ImagePreviewPlugin;
+declare global {
+  interface Window {
+    tcfuMultiImagePreviewPlugin: typeof tcfuMultiImagePreviewPlugin
+  }
+}
+
+window.tcfuImagePreviewPlugin = tcfuMultiImagePreviewPlugin;
+
+export default tcfuMultiImagePreviewPlugin;
