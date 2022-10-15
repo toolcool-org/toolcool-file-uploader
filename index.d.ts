@@ -1,8 +1,20 @@
 declare module 'toolcool-file-uploader' {
 
+  export interface IPreviewCallbackData {
+    file: File;
+    ext: string;
+  }
+
+  export interface IUploadCallbackData {
+    file: File;
+    ext: string;
+  }
+
   export interface ISettings {
     path: string,
-    plugins?: (() => IPlugin)[];
+    plugins?: ((settings: ISettings) => IPlugin)[];
+    uploadCallback?: (data: IUploadCallbackData) => void;
+    previewCallback?: (data: IPreviewCallbackData) => void;
   }
 
   export interface IUploadData {

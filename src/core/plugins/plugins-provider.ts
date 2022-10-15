@@ -15,7 +15,7 @@ const PluginsProvider = (settings: ISettings) : IPluginsProvider => {
     if(!settings.plugins) return;
 
     for(const pluginFunc of settings.plugins){
-      const plugin = pluginFunc();
+      const plugin = pluginFunc(settings);
       plugins.push(plugin);
 
       if(plugin.init && typeof plugin.init === 'function'){
