@@ -1,6 +1,7 @@
 import { ISettings } from '../settings';
 import { getExtensionWithoutDot } from './io-provider';
 import { IPlugin } from '../plugins/plugin-declarations';
+import { isNumber } from './math-provider';
 
 export interface IValidationResult {
   isValid: boolean;
@@ -54,6 +55,14 @@ export const validate = async (settings: ISettings, file: File, plugins: IPlugin
     return {
       isValid: false,
       message: `The '${ file.type }' file MIME type is not supported.`,
+    };
+  }
+
+  // validate the file size -----------------
+  if(isNumber(settings.maxSizeInBytes) && file.size > (settings.maxSizeInBytes as Number)){
+    return {
+      isValid: false,
+      message: `The maximum file size must not exceed ${ settings.maxSizeInBytes } bytes.`,
     };
   }
 
