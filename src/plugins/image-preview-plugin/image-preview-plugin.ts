@@ -1,7 +1,8 @@
-import { IPlugin, IUploadData } from '../../core/plugins/plugin-declarations';
 import './styles.css';
+import { IPlugin, IUploadData } from '../../core/plugins/plugin-declarations';
 import { ISettings } from '../../core/settings';
 import { getExtensionWithoutDot } from '../../core/domain/io-provider';
+import { isNumber } from '../../core/domain/math-provider';
 
 export interface ILoadedImage {
   $image: HTMLImageElement;
@@ -86,12 +87,26 @@ const ImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
      */
     validate: async (_settings: ISettings, file: File) => {
       try{
-        await loadImage(file);
+        img = await loadImage(file);
       }
       catch (ex){
         return {
           isValid: false,
           message: 'Invalid image.'
+        };
+      }
+
+      if(isNumber(_settings.maxWidth) && img.width > (_settings.maxWidth as Number)){
+        return {
+          isValid: false,
+          message: `The image width should not be more than ${ _settings.maxWidth } pixels.`,
+        };
+      }
+
+      if(isNumber(_settings.maxHeight) && img.height > (_settings.maxHeight as Number)){
+        return {
+          isValid: false,
+          message: `The image height should not be more than ${ _settings.maxHeight } pixels.`,
         };
       }
 
