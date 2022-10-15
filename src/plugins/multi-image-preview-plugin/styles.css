@@ -18,3 +18,20 @@
 [data-tc="buttons"] {
     margin-top: 1rem;
 }
+
+[data-tc="preview"] {
+    column-count: 2;
+    column-gap: 1rem;
+}
+
+[data-tc="preview"] figure {
+    margin: 0 0 1rem 0;
+    display: grid;
+    break-inside: avoid;
+    align-content: center;
+    justify-items: center;
+}
+
+[data-tc="preview"] figure > img {
+    display: block;
+}

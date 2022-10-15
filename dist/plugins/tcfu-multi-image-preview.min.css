@@ -1,2 +1,2 @@
-[data-tc=preview-panel]{width:100%;min-height:var(--tcfu-min-height);display:flex;flex-direction:column;align-items:center;justify-content:center}[data-tc=preview-panel] img{max-width:100%;max-height:100%}[data-tc=buttons]{margin-top:1rem}
+[data-tc=preview-panel]{width:100%;min-height:var(--tcfu-min-height);display:flex;flex-direction:column;align-items:center;justify-content:center}[data-tc=preview-panel] img{max-width:100%;max-height:100%}[data-tc=buttons]{margin-top:1rem}[data-tc=preview]{column-count:2;column-gap:1rem}[data-tc=preview] figure{margin:0 0 1rem;display:grid;break-inside:avoid;align-content:center;justify-items:center}[data-tc=preview] figure>img{display:block}
 /*# sourceMappingURL=tcfu-multi-image-preview.min.css.map */

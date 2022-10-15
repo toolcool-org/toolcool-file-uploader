@@ -54,6 +54,10 @@ const tcfuImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
 
     img?.$image.remove();
     img = undefined;
+
+    if(uploadData.$fileInput){
+      uploadData.$fileInput.value = '';
+    }
   };
 
   const upload = () => {

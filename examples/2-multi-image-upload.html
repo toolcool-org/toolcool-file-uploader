@@ -42,7 +42,8 @@
             maxSizeInBytes: 5 * 1024 * 1024, // 5MB
             plugins: [window.tcfuImagePreviewPlugin],
             uploadCallback: (data) => {
-                alert(`The user clicked 'save' button: ${ data.file.name }`);
+                console.log(data);
+                alert(`The user clicked 'save' button.`);
             },
         });
         // api.destroy();

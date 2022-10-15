@@ -27,6 +27,7 @@ declare module 'toolcool-file-uploader' {
     files: File[];
     $uploader: HTMLElement;
     $uploadPanel?: HTMLElement;
+    $fileInput: HTMLInputElement | null;
   }
 
   export interface IPlugin {

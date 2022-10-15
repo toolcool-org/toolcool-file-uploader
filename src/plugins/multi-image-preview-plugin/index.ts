@@ -40,7 +40,7 @@ const loadImage = (file: File) => {
 const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
 
   let uploadData: IUploadData | undefined = undefined;
-  let img: ILoadedImage | undefined = undefined;
+  let $figures: HTMLElement[] = [];
   let $previewPanel: HTMLElement | undefined = undefined;
   let $cancelButton: HTMLElement | undefined = undefined;
   let $uploadBtn: HTMLElement | undefined = undefined;
@@ -51,8 +51,15 @@ const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
     uploadData.$uploadPanel?.classList.remove('hidden');
     $previewPanel?.classList.add('hidden');
 
-    img?.$image.remove();
-    img = undefined;
+    for(const $figure of $figures){
+      $figure.remove();
+    }
+
+    $figures = [];
+
+    if(uploadData.$fileInput){
+      uploadData.$fileInput.value = '';
+    }
   };
 
   const upload = () => {
@@ -83,10 +90,15 @@ const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
      * Check if the image is valid.
      */
     validate: async (_settings: ISettings, file: File) => {
+      let img: ILoadedImage | null = null;
       try{
         img = await loadImage(file);
       }
       catch (ex){
+        // error
+      }
+
+      if(!img){
         return {
           isValid: false,
           message: 'Invalid image.'
@@ -127,39 +139,43 @@ const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
       $uploadBtn = $previewPanel.querySelector('[data-tc="upload-btn"]') as HTMLElement;
       $uploadBtn?.addEventListener('click', upload);
 
-      /*try{
-        img = await loadImage(uploadData.file);
-      }
-      catch (ex){
-        console.error('Image is not valid:', ex);
-      }
-
-      if(!img) return;
-
       const $preview = $previewPanel.querySelector('[data-tc="preview"]') as HTMLElement;
-      $preview?.append(img.$image);
+
+      for(const file of uploadData.files){
+        let img: ILoadedImage | null = null;
+
+        try{
+          img = await loadImage(file);
+        }
+        catch (ex){
+          console.error('Image is not valid:', ex);
+        }
+
+        if(!img) continue;
+        const $figure = document.createElement('figure') as HTMLElement;
+        $figure.append(img.$image);
+        $figures.push($figure);
+        $preview?.append($figure);
+      }
 
       if(_settings.previewCallback && typeof _settings.previewCallback === 'function'){
         _settings.previewCallback({
-          file: _uploadData.file,
-          ext: getExtensionWithoutDot(_uploadData.file?.name ?? ''),
+          files: _uploadData.files,
         });
-      }*/
+      }
     },
 
     destroy: () => {
-      try{
-        img?.$image?.remove();
+      for(const $figure of $figures){
+        $figure.remove();
       }
-      catch(ex){
-        // error
-      }
+
+      $figures = [];
 
       $cancelButton?.removeEventListener('click', cancel);
       $uploadBtn?.removeEventListener('click', upload);
 
       uploadData = undefined;
-      img = undefined;
       $previewPanel = undefined;
       $cancelButton = undefined;
       $uploadBtn = undefined;

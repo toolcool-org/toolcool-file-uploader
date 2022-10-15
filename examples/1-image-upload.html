@@ -44,7 +44,7 @@
                 console.log(data);
             },*/
             uploadCallback: (data) => {
-                alert(`The user clicked 'save' button: ${ data.file.name }`);
+                alert(`The user clicked 'save' button: ${ data.files[0].name }`);
             },
         });
         // api.destroy();

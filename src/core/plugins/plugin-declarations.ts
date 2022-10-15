@@ -5,6 +5,7 @@ export interface IUploadData {
   files: File[];
   $uploader: HTMLElement;
   $uploadPanel?: HTMLElement;
+  $fileInput: HTMLInputElement | null;
 }
 
 export interface IPlugin {
