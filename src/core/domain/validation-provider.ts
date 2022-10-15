@@ -20,6 +20,20 @@ const extensionIncluded = (ext: string, plugins: IPlugin[]) => {
   return false;
 };
 
+/**
+ * Check if the specified mime type
+ * is included in at least one plugin.
+ * https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types
+ */
+const mimeTypeIncluded = (mimeType: string, plugins: IPlugin[]) => {
+
+  for(const plugin of plugins){
+    if(plugin.mimeTypes.includes(mimeType)) return true;
+  }
+
+  return false;
+};
+
 export const validate = (settings: ISettings, file: File, plugins: IPlugin[]) : IValidationResult => {
   if(!settings.validationEnabled) return {
     isValid: true,
@@ -32,6 +46,14 @@ export const validate = (settings: ISettings, file: File, plugins: IPlugin[]) : 
     return {
       isValid: false,
       message: `The '.${ ext }' file extension is not supported.`,
+    };
+  }
+
+  // validate file mime type ----------------
+  if(!mimeTypeIncluded(file.type, plugins)){
+    return {
+      isValid: false,
+      message: `The '${ file.type }' file MIME type is not supported.`,
     };
   }
 

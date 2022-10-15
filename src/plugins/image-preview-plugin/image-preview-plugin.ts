@@ -71,7 +71,15 @@ const ImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
     id: 'ImagePreviewPlugin',
     title: 'Image Preview Plugin',
 
-    extensions: ['jpg', 'jpeg', 'png', 'gif'],
+    extensions: ['jpg', 'jpeg', 'png', 'apng', 'gif', 'avif', 'svg', 'webp'],
+    mimeTypes: [
+      'image/jpeg',
+      'image/png',
+      'image/apng',
+      'image/avif',
+      'image/svg+xml',
+      'image/webp',
+    ],
 
     upload: async (_uploadData: IUploadData) => {
       uploadData = _uploadData;
