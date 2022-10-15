@@ -16,9 +16,11 @@ export interface ISettings {
   plugins?: ((settings: ISettings) => IPlugin)[];
   uploadCallback?: (data: IUploadCallbackData) => void;
   previewCallback?: (data: IPreviewCallbackData) => void;
+  validationEnabled?: boolean;
 }
 
 export const settings : ISettings = {
   path: '',
   plugins: [ImagePreviewPlugin],
+  validationEnabled: true,
 };

@@ -15,6 +15,7 @@ declare module 'toolcool-file-uploader' {
     plugins?: ((settings: ISettings) => IPlugin)[];
     uploadCallback?: (data: IUploadCallbackData) => void;
     previewCallback?: (data: IPreviewCallbackData) => void;
+    validationEnabled?: boolean;
   }
 
   export interface IUploadData {
@@ -34,10 +35,16 @@ declare module 'toolcool-file-uploader' {
     init: () => void;
     upload?: (uploadData: IUploadData) => void;
     destroy: () => void;
+    getPlugins: () => IPlugin[];
   }
 
   export interface IUploader {
     destroy: () => void;
+  }
+
+  export interface IValidationResult {
+    isValid: boolean;
+    message: string;
   }
 
   export interface IToolCoolFileUploader {

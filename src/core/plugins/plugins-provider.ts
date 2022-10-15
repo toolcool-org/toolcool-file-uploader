@@ -5,6 +5,7 @@ export interface IPluginsProvider {
   init: () => void;
   upload: (uploadData: IUploadData) => void;
   destroy: () => void;
+  getPlugins: () => IPlugin[];
 }
 
 const PluginsProvider = (settings: ISettings) : IPluginsProvider => {
@@ -40,10 +41,15 @@ const PluginsProvider = (settings: ISettings) : IPluginsProvider => {
     }
   };
 
+  const getPlugins = () => {
+    return plugins;
+  };
+
   return {
     init,
     upload,
     destroy,
+    getPlugins,
   };
 };
 

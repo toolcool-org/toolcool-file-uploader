@@ -1,5 +1,6 @@
 import PluginsProvider, { IPluginsProvider } from '../plugins/plugins-provider';
 import { ISettings } from '../settings';
+import { validate } from '../domain/validation-provider';
 
 export interface IUploader {
   destroy: () => void;
@@ -40,6 +41,13 @@ const Uploader = ($uploader: HTMLElement, settings: ISettings) : IUploader => {
   };
 
   const upload = async (file: File) => {
+
+    // perform validations ----------------
+    const validationResult = validate(settings, file, pluginsProvider?.getPlugins() ?? []);
+    if(!validationResult.isValid){
+      alert(validationResult.message);
+      return;
+    }
 
     pluginsProvider?.upload({
       file,
