@@ -30,6 +30,23 @@
     break-inside: avoid;
     align-content: center;
     justify-items: center;
+    position: relative;
+}
+
+.tcfu-remove-btn {
+    position: absolute;
+    appearance: none;
+    cursor: pointer;
+    right: 0.5rem;
+    top: 0.5rem;
+    border: 0;
+    border-radius: 3px;
+    background: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.3rem 0.5rem;
+    margin: 0;
 }
 
 [data-tc="preview"] figure > img {

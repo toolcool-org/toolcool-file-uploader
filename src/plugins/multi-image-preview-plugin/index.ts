@@ -72,6 +72,22 @@ const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
     }
   };
 
+  const removeImage = (evt: MouseEvent) => {
+    const $btn = evt.currentTarget as HTMLButtonElement;
+    const $figure = $btn.parentElement;
+    if(!$figure) return;
+
+    const foundIndex = $figures.findIndex(item => item === $figure);
+    if(foundIndex === -1) return;
+
+    $figures.splice(foundIndex, 1);
+    $figure.remove();
+
+    if($figures.length <= 0){
+      cancel();
+    }
+  };
+
   return {
     id: 'MultiImagePreviewPlugin',
     title: 'Multi Image Preview Plugin',
@@ -153,6 +169,27 @@ const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
 
         if(!img) continue;
         const $figure = document.createElement('figure') as HTMLElement;
+
+        const $removeImageBtn = document.createElement('button') as HTMLButtonElement;
+        $removeImageBtn.type = 'button';
+        $removeImageBtn.classList.add('tcfu-remove-btn');
+        $removeImageBtn.innerHTML = `
+<svg 
+  xmlns="http://www.w3.org/2000/svg" 
+  width="20"
+  height="20"
+  fill="none" 
+  stroke="currentColor" 
+  stroke-linecap="round" 
+  stroke-linejoin="round" 
+  stroke-width="1.5" 
+  viewBox="0 0 24 24">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M18 6 6 18M6 6l12 12"/>
+</svg>`;
+        $figure.append($removeImageBtn);
+        $removeImageBtn.addEventListener('click', removeImage);
+
         $figure.append(img.$image);
         $figures.push($figure);
         $preview?.append($figure);
