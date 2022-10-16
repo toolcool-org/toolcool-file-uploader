@@ -1,5 +1,4 @@
 import { IPlugin } from './plugins/plugin-declarations';
-import ImagePreviewPlugin from '../plugins/image-preview-plugin';
 
 export interface IPreviewCallbackData {
   files: File[];
@@ -26,6 +25,6 @@ export interface ISettings {
 
 export const settings : ISettings = {
   path: '',
-  plugins: [ImagePreviewPlugin],
+  plugins: [],
   validationEnabled: true,
 };

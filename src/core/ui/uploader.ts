@@ -53,16 +53,6 @@ const Uploader = ($uploader: HTMLElement, settings: ISettings) : IUploader => {
       $uploadPanel,
       $fileInput,
     });
-
-    /*
-    if (!file.type.match('image.*')) {
-      // https://fkhadra.github.io/react-toastify/introduction/
-      toast('⚠️ Only image files are supported.');
-      return;
-    }
-
-    const img = await loadImage(file);
-    */
   };
 
   const onFileInputChange = async (evt: MouseEvent) => {

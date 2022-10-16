@@ -40,7 +40,7 @@
         const api = window.tcFileUploader({
             path: '#uploader-1',
             maxSizeInBytes: 5 * 1024 * 1024, // 5MB
-            plugins: [window.tcfuImagePreviewPlugin],
+            plugins: [window.tcfuMultiImagePreviewPlugin],
             uploadCallback: (data) => {
                 console.log(data);
                 alert(`The user clicked 'save' button.`);

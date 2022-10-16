@@ -36,7 +36,6 @@ export const loadImage = (file: File) => {
 
 /**
  * This plugin displays standard image formats in the preview panel.
- * This plugin is part of the core system.
  */
 const tcfuImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
 

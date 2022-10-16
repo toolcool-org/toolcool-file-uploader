@@ -189,6 +189,6 @@ declare global {
   }
 }
 
-window.tcfuImagePreviewPlugin = tcfuMultiImagePreviewPlugin;
+window.tcfuMultiImagePreviewPlugin = tcfuMultiImagePreviewPlugin;
 
 export default tcfuMultiImagePreviewPlugin;

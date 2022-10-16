@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/plugins/image-preview-plugin/styles.css"],
+  "sourcesContent": ["/**\n * preview panel styles\n */\n[data-tc=\"preview-panel\"] {\n    width: 100%;\n    min-height: var(--tcfu-min-height);\n    display: flex;\n    flex-direction: column;\n    align-items: center;\n    justify-content: center;\n}\n\n[data-tc=\"preview-panel\"] img {\n    max-width: 100%;\n    max-height: 100%;\n}\n\n[data-tc=\"buttons\"] {\n    margin-top: 1rem;\n}"],
+  "mappings": "AAGA,wBACI,WACA,kCACA,aACA,sBACA,mBACA,uBAGJ,4BACI,eACA,gBAGJ,kBACI",
+  "names": []
+}
