@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Multiple Image Upload Example | Tool Cool File Uploader</title>
+    <title>Simple Upload Example | Tool Cool File Uploader</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <link rel="stylesheet" href="../dist/toolcool-file-uploader.min.css" />
-    <link rel="stylesheet" href="../dist/plugins/tcfu-multi-image-preview.min.css" />
+    <link rel="stylesheet" href="../dist/plugins/tcfu-simple-upload.min.css" />
 </head>
 <body>
-    <h1>Multiple Image Upload Example</h1>
+    <h1>Simple Upload Example</h1>
 
     <div class="tc-file-uploader" id="uploader-1">
 
@@ -16,8 +16,8 @@
         <div data-tc="upload-panel">
             <div class="tc-upload-panel__inputs">
                 <label>
-                    <input type="file" class="hidden" accept=".jpg,.jpeg,.png,.apng,.gif,.avif,.svg,.webp" multiple />
-                    <span class="tcfu__btn">Choose Images</span>
+                    <input type="file" class="hidden" multiple />
+                    <span class="tcfu__btn">Choose File(s)</span>
                 </label>
 
                 <span>or drag them here.</span>
@@ -35,18 +35,16 @@
     </div>
 
     <script src="../dist/toolcool-file-uploader.min.js"></script>
-    <script src="../dist/plugins/tcfu-multi-image-preview.min.js"></script>
+    <script src="../dist/plugins/tcfu-simple-upload.min.js"></script>
     <script>
-        const api = window.tcFileUploader({
+        window.tcFileUploader({
             path: '#uploader-1',
-            maxSizeInBytes: 5 * 1024 * 1024, // 5MB
-            plugins: [window.tcfuMultiImagePreviewPlugin],
+            // maxSizeInBytes: 5 * 1024 * 1024, // 5MB
+            plugins: [window.tcfuSimpleUploadPlugin],
             uploadCallback: (data) => {
-                console.log(data);
-                alert(`The user clicked 'save' button.`);
+                alert(`The user clicked 'save' button: ${ data.files[0].name }`);
             },
         });
-        // api.destroy();
     </script>
 </body>
 </html>

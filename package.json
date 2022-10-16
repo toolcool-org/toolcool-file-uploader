@@ -14,6 +14,8 @@
     "docs:watch": "nodemon ./src/docs/generator/index.js",
     "docs:install": "node node_modules/markdown-documentation-maker/run/install.js",
     "typescript-declarations": "tsc --emitDeclarationOnly",
+    "simple-upload-plugin:build": "node run/plugins/simple-upload-plugin.js",
+    "simple-upload-plugin:watch": "node run/plugins/simple-upload-plugin.js -- watch",
     "image-preview-plugin:build": "node run/plugins/image-preview-plugin.js",
     "image-preview-plugin:watch": "node run/plugins/image-preview-plugin.js -- watch",
     "multi-image-preview-plugin:build": "node run/plugins/multi-image-preview-plugin.js",

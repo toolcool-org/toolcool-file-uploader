@@ -1,0 +1,47 @@
+/**
+ * preview panel styles
+ */
+[data-tc="preview-panel"] {
+    width: 100%;
+    min-height: var(--tcfu-min-height);
+    display: flex;
+    flex-direction: column;
+}
+
+[data-tc="buttons"] {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+[data-tc="preview"] {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+}
+
+.tcfu-file-box{
+    background: #F1F5F9;
+    color: #111;
+    margin: 0;
+    padding: 0.7rem 1.4rem;
+    border-radius: 3px;
+    position: relative;
+}
+
+.tcfu-remove-btn {
+    position: absolute;
+    appearance: none;
+    cursor: pointer;
+    right: 3px;
+    top: 3px;
+    border: 0;
+    border-radius: 3px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+}

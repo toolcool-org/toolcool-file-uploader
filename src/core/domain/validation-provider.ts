@@ -15,7 +15,8 @@ export interface IValidationResult {
 const extensionIncluded = (ext: string, plugins: IPlugin[]) => {
 
   for(const plugin of plugins){
-    if(plugin.extensions.includes(ext)) return true;
+    if(plugin.extensions.includes('*') ||
+      plugin.extensions.includes(ext)) return true;
   }
 
   return false;
@@ -29,7 +30,8 @@ const extensionIncluded = (ext: string, plugins: IPlugin[]) => {
 const mimeTypeIncluded = (mimeType: string, plugins: IPlugin[]) => {
 
   for(const plugin of plugins){
-    if(plugin.mimeTypes.includes(mimeType)) return true;
+    if(plugin.mimeTypes.includes('*') ||
+      plugin.mimeTypes.includes(mimeType)) return true;
   }
 
   return false;
