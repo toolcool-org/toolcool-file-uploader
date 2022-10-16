@@ -9,6 +9,11 @@ export interface ILoadedImage {
   height: number;
 }
 
+interface IGridItems {
+  $figure: HTMLElement;
+  file: File;
+}
+
 const loadImage = (file: File) => {
   return new Promise<ILoadedImage>((resolve, reject) => {
     const $image = new Image();
@@ -34,13 +39,27 @@ const loadImage = (file: File) => {
   });
 };
 
+const removeBtnSVG = `<svg 
+  xmlns="http://www.w3.org/2000/svg" 
+  width="20"
+  height="20"
+  fill="none" 
+  stroke="currentColor" 
+  stroke-linecap="round" 
+  stroke-linejoin="round" 
+  stroke-width="1.5" 
+  viewBox="0 0 24 24">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M18 6 6 18M6 6l12 12"/>
+</svg>`;
+
 /**
  * This plugin displays a group of standard image formats in the preview panel.
  */
 const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
 
   let uploadData: IUploadData | undefined = undefined;
-  let $figures: HTMLElement[] = [];
+  let gridItems: IGridItems[] = [];
   let $previewPanel: HTMLElement | undefined = undefined;
   let $cancelButton: HTMLElement | undefined = undefined;
   let $uploadBtn: HTMLElement | undefined = undefined;
@@ -51,11 +70,11 @@ const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
     uploadData.$uploadPanel?.classList.remove('hidden');
     $previewPanel?.classList.add('hidden');
 
-    for(const $figure of $figures){
-      $figure.remove();
+    for(const gridItem of gridItems){
+      gridItem.$figure.remove();
     }
 
-    $figures = [];
+    gridItems = [];
 
     if(uploadData.$fileInput){
       uploadData.$fileInput.value = '';
@@ -67,7 +86,7 @@ const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
 
     if(_settings.uploadCallback && typeof _settings.uploadCallback === 'function'){
       _settings.uploadCallback({
-        files: uploadData.files,
+        files: gridItems.map(item => item.file),
       });
     }
   };
@@ -77,13 +96,13 @@ const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
     const $figure = $btn.parentElement;
     if(!$figure) return;
 
-    const foundIndex = $figures.findIndex(item => item === $figure);
+    const foundIndex = gridItems.findIndex(gridItem => gridItem.$figure === $figure);
     if(foundIndex === -1) return;
 
-    $figures.splice(foundIndex, 1);
+    gridItems.splice(foundIndex, 1);
     $figure.remove();
 
-    if($figures.length <= 0){
+    if(gridItems.length <= 0){
       cancel();
     }
   };
@@ -173,25 +192,15 @@ const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
         const $removeImageBtn = document.createElement('button') as HTMLButtonElement;
         $removeImageBtn.type = 'button';
         $removeImageBtn.classList.add('tcfu-remove-btn');
-        $removeImageBtn.innerHTML = `
-<svg 
-  xmlns="http://www.w3.org/2000/svg" 
-  width="20"
-  height="20"
-  fill="none" 
-  stroke="currentColor" 
-  stroke-linecap="round" 
-  stroke-linejoin="round" 
-  stroke-width="1.5" 
-  viewBox="0 0 24 24">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <path d="M18 6 6 18M6 6l12 12"/>
-</svg>`;
+        $removeImageBtn.innerHTML = removeBtnSVG;
         $figure.append($removeImageBtn);
         $removeImageBtn.addEventListener('click', removeImage);
 
         $figure.append(img.$image);
-        $figures.push($figure);
+        gridItems.push({
+          $figure,
+          file,
+        });
         $preview?.append($figure);
       }
 
@@ -203,11 +212,11 @@ const tcfuMultiImagePreviewPlugin = (_settings: ISettings) : IPlugin => {
     },
 
     destroy: () => {
-      for(const $figure of $figures){
-        $figure.remove();
+      for(const gridItem of gridItems){
+        gridItem.$figure.remove();
       }
 
-      $figures = [];
+      gridItems = [];
 
       $cancelButton?.removeEventListener('click', cancel);
       $uploadBtn?.removeEventListener('click', upload);
