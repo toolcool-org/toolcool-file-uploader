@@ -24,7 +24,7 @@
     align-items: center;
     justify-items: center;
     padding: 1rem;
-    width: 100%;
+    width: calc(100% - 2rem);
     min-height: var(--tcfu-min-height);
     max-width: 650px;
     border-radius: 3px;
