@@ -19,7 +19,9 @@
     "image-preview-plugin:build": "node run/plugins/image-preview-plugin.js",
     "image-preview-plugin:watch": "node run/plugins/image-preview-plugin.js -- watch",
     "multi-image-preview-plugin:build": "node run/plugins/multi-image-preview-plugin.js",
-    "multi-image-preview-plugin:watch": "node run/plugins/multi-image-preview-plugin.js -- watch"
+    "multi-image-preview-plugin:watch": "node run/plugins/multi-image-preview-plugin.js -- watch",
+    "multi-pdf-preview-plugin:build": "node run/plugins/multi-pdf-preview-plugin.js",
+    "multi-pdf-preview-plugin:watch": "node run/plugins/multi-pdf-preview-plugin.js -- watch"
   },
   "type": "module",
   "keywords": [

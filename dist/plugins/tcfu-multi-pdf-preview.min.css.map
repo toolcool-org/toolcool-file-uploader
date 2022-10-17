@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../src/plugins/multi-pdf-preview-plugin/styles.css"],
+  "sourcesContent": ["/**\n * preview panel styles\n */\n[data-tc=\"preview-panel\"] {\n    width: 100%;\n    min-height: var(--tcfu-min-height);\n    display: flex;\n    flex-direction: column;\n}\n\n[data-tc=\"buttons\"] {\n    margin-top: 3rem;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n[data-tc=\"preview\"] {\n    display: grid;\n    grid-template-columns: repeat(2, 1fr);\n    gap: 1rem;\n}\n\n.tcfu-file-box{\n    position: relative;\n}\n\n.tcfu-remove-btn {\n    position: absolute;\n    appearance: none;\n    cursor: pointer;\n    left: 3px;\n    top: 3px;\n    border: 0;\n    border-radius: 3px;\n    background: rgb(17 25 39);\n    color: #fff;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    padding: 0;\n    margin: 0;\n}\n\nembed {\n    max-width: 100%;\n    border: 0;\n}"],
+  "mappings": "AAGA,wBACI,WACA,kCACA,aACA,sBAGJ,kBACI,gBACA,aACA,mBACA,uBAGJ,kBACI,aACA,oCACA,SAGJ,eACI,kBAGJ,iBACI,kBACA,gBACA,eACA,SACA,QACA,SAjCJ,kBAmCI,yBACA,WACA,aACA,mBACA,uBAvCJ,mBA4CA,MACI,eACA",
+  "names": []
+}

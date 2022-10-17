@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Multiple PDF Upload Example | Tool Cool File Uploader</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="../dist/toolcool-file-uploader.min.css" />
+    <link rel="stylesheet" href="../dist/plugins/tcfu-multi-pdf-preview.min.css" />
+</head>
+<body>
+    <h1>Multiple PDF Upload Example</h1>
+
+    <div class="tc-file-uploader" id="uploader-1">
+
+        <!-- upload panel -->
+        <div data-tc="upload-panel">
+            <div class="tc-upload-panel__inputs">
+                <label>
+                    <input type="file" class="hidden" accept=".pdf" multiple />
+                    <span class="tcfu__btn">Choose PDF(s)</span>
+                </label>
+
+                <span>or drag them here.</span>
+            </div>
+        </div>
+
+        <!-- preview panel -->
+        <div data-tc="preview-panel" class="hidden">
+            <div data-tc="preview"></div>
+            <div data-tc="buttons">
+                <button type="button" class="tcfu__btn" data-tc="upload-btn">Upload</button>
+                <button type="button" class="tcfu__btn" data-tc="cancel-preview-btn">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../dist/toolcool-file-uploader.min.js"></script>
+    <script src="../dist/plugins/tcfu-multi-pdf-preview.min.js"></script>
+    <script>
+        const api = window.tcFileUploader({
+            path: '#uploader-1',
+            // maxSizeInBytes: 5 * 1024 * 1024, // 5MB
+            plugins: [window.tcfuMultiPDFPreviewPlugin],
+            uploadCallback: (data) => {
+                console.log(data);
+                alert(`The user clicked 'save' button.`);
+            },
+        });
+        // api.destroy();
+    </script>
+</body>
+</html>

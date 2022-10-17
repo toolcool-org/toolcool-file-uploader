@@ -1,6 +1,7 @@
 # Tool Cool File Uploader
 
 ## Features
+- upload one or more files with possibility to validate / remove them.
 - drag and drop and file input callback
 - plugins system
 - image preview plugin
@@ -13,6 +14,7 @@
 - image preview plugin
 - multi image preview plugin with possibility to remove images
 - * means any extension is supported
+- multi pdf viewer
 
 ## Usage
 - Upload panel is defined by `data-tc="upload-panel"`.
